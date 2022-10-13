@@ -13,6 +13,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <time.h>
 
 #define BACKLOG 10
 
@@ -130,6 +131,19 @@ int main(int argc, char *argv[]) {
      * signal_handler(), meaning socket_fd would need to be a global variable.
      */
     return 0;
+}
+
+void msleep(int duration /* in milliseconds */) {
+
+    /* Split milliseconds into equivalent seconds + nanoseconds */
+    struct timespec sleep_period = {
+        .tv_sec  =  duration / 1000,
+        .tv_nsec = (duration % 1000) * 1000000
+    };
+
+    /* Sleep for specified interval */
+    nanosleep(&sleep_period, NULL);
+
 }
 
 void *pthread_routine(void *arg) {
