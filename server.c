@@ -154,6 +154,15 @@ void *pthread_routine(void *arg) {
 
     free(arg);
 
+    printf("routine started\n");
+
+    while (1) {
+        msleep(8000);
+        break;
+    }
+
+    printf("routine ended\n");
+
     /* TODO: Put client interaction code here. For example, use
      * write(new_socket_fd,,) and read(new_socket_fd,,) to send and receive
      * messages with the client.
